@@ -1,0 +1,21 @@
+README
+
+To run file (I used Linux):
+    1) open zip file
+    2) locate Backup.pyc file in terminal
+    2.a)    ensure you have boto3 installed by running: python -m pip install --user boto3
+    3) to run the program, type the following:
+	    Linux: 	python Backup.pyc or python Backup.py
+	    Windows: 	py Backup.pyc  or py Backup.py
+
+Pre-built version: Included Backup.pyc file included.
+
+Assumptions: I will create a new bucket for you named mishaward2462890.
+	     That the grader/tester has AWS configured on their machine and credentials to be set
+	     That the user will provide correct input. Correct input is a bucket that has a unique name that they have access to.
+
+Architecture and Design of Program:
+    The overall design of the program is to ask the user for a directory, then check if the user input is a directory (not a file) and that the directory exists on the user's system. From there, the program checks to see if the Bucket mishaward2462890 exists (or a user entered bucket). If the bucket does not exist, then the bucket is created. Otherwise, the program creates a dictionary and gets the keys (filepaths) and values (AWS date modified values) from the bucket. At this point the program then calculates the total number of files (that are not hidden) to transfer over to AWS. Finally, the program loops through the files and filters out hidden files and folders. At this point, the program goes through each directory and constructs a file path to the files. Once a file has been found and the path constructed, the program tries to check the dictionary for any values, if not, it uploads the files. If there are values in the dictionary, then the program loops through to check the time stamps. If the time stamp doesn't exist, then it uploads that file. If the time stamp exists, then it checks to see if the date stamp from the file is newer than the AWS date stamp. Once the program finishes, the user is alerted that the program has uploaded the files (although a progress report is provided for each file uploaded). 
+
+NOTE: I used mishaward2462890 as a unique bucket name as a default, but can be modified by the user. 
+NOTE: I am using python version 3.4, I tried to run the program on Linux at school but they would not let me install boto3.
