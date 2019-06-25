@@ -1,0 +1,40 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1561\cocoasubrtf600
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fnil\fcharset0 Monaco;}
+{\colortbl;\red255\green255\blue255;\red242\green242\blue242;\red0\green0\blue0;}
+{\*\expandedcolortbl;;\csgray\c95825;\csgray\c0\c85000;}
+\margl1440\margr1440\vieww10800\viewh8400\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 Project 1: Misha Ward\
+\
+READ ME:\
+
+\b - To run program, save the java file in a file path you want to use. \
+- Open Terminal and go to the file path. Once in the file path, type in the following command:
+\b0 \
+-Type in the command below with your website and number of hops\
+\
+java main http://yourwebsite.com \{number of hops as whole number\}\
+\
+Example:\
+java main http://google.com 8\
+\
+This should yield the result (does not include all the entire HTML link):\
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f1\fs20 \cf2 \cb3 \CocoaLigature0 Hello there, this is the simple webcrawler. \
+Current defaults for this website is http://google.com and hops is set to 8. \
+\
+--------------------------------------- HTML Links Below ---------------------------------------\
+Original Url: http://google.com. \
+Response code: 200\
+Hop 1, Redirect url: http://www.google.com/history/optout?hl=en -> https://www.google.com/history/optout?hl=en\
+Response code: 301\
+Hop 2 is url: https://support.google.com/accounts/answer/61416.\
+Response code: 200\
+\
+The last url was malformed: /accounts\
+Because the last hop was malformed link, the last working website is: https://support.google.com/accounts/answer/61416\
+--------------------------------------- HTML String Below --------------------------------------\
+<!doctype html><html class="hcfe material2" data-page-type="ANSWER" lang="en"><head><title>Enable or disable cookies - Computer - Google Account Help</title><meta content="email=no" name="format-detection"><meta content="nofollow,noindex" name="robots"><meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible"><meta content="To use your Google Account on a browser (like Chrome or Safari), turn on cookies if you haven't already.&#10;Important: If you get a message that cookies are turned off, you need to turn them on to use y" name="description"><link href="https://support.google.com/accounts/answer/61416?co=GENIE.Platform%3DDesktop&amp;hl=en" rel="canonical"><meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" name="viewport"><style>@font-face\{font-family:'Roboto';font-style:normal;font-weight:400;src:local('Roboto Regular'),local('Roboto-Regular'),url(https://fonts.gstatic.com/s/roboto/v18/KFOmCnqEu92Fr1Mu4mxP.ttf)format('truetype');\}@font-face\{font-family:'Roboto';font-style:normal;font-weight:500;src:local('Roboto Medium\'92),}
