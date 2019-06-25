@@ -1,0 +1,17 @@
+README
+
+/************************************************************************
+*                                                                       *
+*              -- Simple Weather Program by Misha Ward --               *
+*       Program asks for user for city name, then provides a 5 day      *
+*       forecast for that city. It also provides windspeed for that     *
+*       day. The program handles incorrect inputs by providing          *
+*       the user error message and promoting them to provide a new      *
+*       input or to exit the program.                                   *
+*                                                                       *
+************************************************************************/
+
+To run file:
+    1) open zip file
+    2) locate jar file in terminal
+    3) to run the program type the following: java -jar weatherAPI.jar
