@@ -1,0 +1,157 @@
+<html lang="en" style="" class=" js flexbox flexboxlegacy canvas canvastext webgl no-touch geolocation postmessage websqldatabase indexeddb hashchange history draganddrop websockets rgba hsla multiplebgs backgroundsize borderimage borderradius boxshadow textshadow opacity cssanimations csscolumns cssgradients cssreflections csstransforms csstransforms3d csstransitions fontface generatedcontent video audio localstorage sessionstorage webworkers applicationcache svg inlinesvg smil svgclippaths">
+   <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>
+         Home Page - My Application
+      </title>
+      <link href="favicon.ico" rel="shortcut icon" type="image/x-icon">
+   </head>
+   <body>
+       <div>
+           <h1>Program 4 by Misha Ward</h1>
+           <div class="firstName">
+               <label for="firstName">First name:</label>
+               <textarea id="firstName" name="firstName"></textarea>
+          </div>
+          <div class="lastName">
+              <label for="lastName">Last name:</label>
+              <textarea id="lastName" name="lastName"></textarea>
+         </div>
+         <button onclick="loadData()">Load data</button>
+         <button onclick="clearData()">Clear data</button>
+         <button onclick="queryData()">Query data</button>
+         <div class="results">
+             Results:
+             <div id="results">
+                 None
+             </div>
+         </div>
+         <div id="error" style="color:red;"></div>
+         <img id="loading" style="display:none;" src="https://media.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif" alt="Trulli" width="200" height="200">
+      </div>
+      <script>
+          var baseUrl = 'http://127.0.0.1:5000';
+          function startWait() {
+              var loading = document.getElementById('loading');
+              loading.style = 'display:block;';
+          }
+
+          function endWait() {
+              var loading = document.getElementById('loading');
+              loading.style = 'display:none;';
+          }
+
+          function handleError(xhttp) {
+              var error = document.getElementById('error');
+              error.innerHTML = "<div> status: " + xhttp.status + ", message: " + xhttp.response + "</div>";
+              endWait();
+          }
+
+          function endError(xhttp) {
+              var error = document.getElementById('error');
+              error.innerHTML = "";
+              endWait();
+          }
+
+          function queryData() {
+              var xhttp = new XMLHttpRequest();
+              xhttp.onreadystatechange = function() {
+                  if (this.status == 0) {
+                      startWait();
+                  } else if (this.status == 200) {
+                      if (this.readyState == 4) {
+                          endError();
+                          // Parse data to display on front end
+                          console.log(xhttp.response);
+                          var json = JSON.parse(xhttp.response);
+                          var resultsList = document.getElementById('results');
+                          resultsList.innerHTML = "None";
+                          var results = null;
+                          json.Items.forEach((item) => {
+                              if (results === null) {
+                                  results = document.createElement('div');
+                              }
+                              var data = JSON.parse(item.data);
+                              var ul = document.createElement('ul');
+                              Object.keys(data).forEach(function(key) {
+                                  var entry = document.createElement('li');
+                                  entry.appendChild(document.createTextNode('['));
+                                  entry.appendChild(document.createTextNode(key));
+                                  entry.appendChild(document.createTextNode('] = '));
+                                  entry.appendChild(document.createTextNode(data[key]));
+                                  ul.appendChild(entry);
+                              });
+                              var newEntry = document.createElement('div');
+                              newEntry.appendChild(document.createTextNode('Name: '));
+                              newEntry.appendChild(document.createTextNode(item['first_name']));
+                              newEntry.appendChild(document.createTextNode(' '));
+                              newEntry.appendChild(document.createTextNode(item['last_name']));
+                              newEntry.appendChild(ul);
+                              results.appendChild(newEntry);
+                          });
+                          if (results !== null) {
+                              resultsList.innerHTML = "";
+                              resultsList.appendChild(results);
+                          }
+                      } else {
+                          startWait();
+                      }
+                  } else {
+                      // Error
+                      handleError(xhttp);
+                  }
+              };
+              var first_name = document.getElementById('firstName').value;
+              var last_name = document.getElementById('lastName').value;
+              xhttp.open("GET", baseUrl + "/getData?first_name=" + first_name + "&last_name=" + last_name, true);
+              xhttp.setRequestHeader('Accept', 'application/json');
+              xhttp.send();
+          }
+
+          function loadData() {
+              var xhttp = new XMLHttpRequest();
+              xhttp.onreadystatechange = function() {
+                  if (this.status == 0) {
+                      startWait();
+                  } else if (this.status == 200) {
+                      if (this.readyState == 4) {
+                          endError();
+                          // Parse data to display on front end
+                          console.log(xhttp.response);
+                      } else {
+                          startWait();
+                      }
+                  } else {
+                      // Error
+                      handleError(xhttp);
+                  }
+              };
+              xhttp.open("POST", baseUrl + "/loadData", true);
+              xhttp.send();
+          }
+
+          function clearData() {
+              var xhttp = new XMLHttpRequest();
+              xhttp.onreadystatechange = function() {
+                  if (this.status == 0) {
+                      startWait();
+                  } else if (this.status == 200) {
+                      if (this.readyState == 4) {
+                          endError();
+                          // Parse data to display on front end
+                          console.log(xhttp.response);
+                      } else {
+                          startWait();
+                      }
+                  } else {
+                      // Error
+                      handleError(xhttp);
+                  }
+              };
+              xhttp.open("DELETE", baseUrl + "/clearData", true);
+              xhttp.send();
+          }
+      </script>
+   </body>
+</html>
